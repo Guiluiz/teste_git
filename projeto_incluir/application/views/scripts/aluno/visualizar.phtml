@@ -1,0 +1,216 @@
+<?php
+if ($this->aluno instanceof Application_Model_Aluno):
+    $array_aprovacao = array(
+        Application_Model_Aluno::$aluno_aprovado => 'Aprovado',
+        Application_Model_Aluno::$aluno_reprovado => 'Reprovado',
+        Application_Model_Aluno::$aluno_sem_status_aprovacao => '-');
+    ?>
+
+    <h2>Informações Gerais do Aluno</h2>
+
+    <table class="form-dados visualizacao" style="width: 60%;">
+        <tr>
+            <th style="width: 5%">Nome: </th><td colspan="2"><?php echo $this->aluno->getNomeAluno() ?></td>
+        </tr>
+
+        <tr>
+            <th>CPF: </th><td><?php echo $this->aluno->getCpf() ?></td>
+        </tr>
+
+        <tr>
+            <th>Nome do Responsável: </th><td><?php echo $this->aluno->getNomeResponsavel() ?></td>
+        </tr>
+
+        <tr>
+            <th>Data de Nascimento: </th><td><?php echo $this->aluno->getDataNascimento(true) ?></td>
+        </tr>
+
+        <tr>
+            <th>Data de Matrícula: </th><td><?php echo $this->aluno->getDataRegistro(true) ?></td>
+        </tr>
+
+
+        <tr>
+            <th>Escolaridade: </th><td><?php echo $this->aluno->getEscolaridade() ?></td>
+        </tr>
+
+        <?php if ($this->aluno->isAtivo()): ?>
+            <tr>
+                <th>Status: </th><td>Ativo</td>
+            </tr>
+
+        <?php else: ?>
+            <tr>
+                <th>Status: </th><td>Desligado</td>
+            </tr>
+
+            <tr>
+                <th>Data do Desligamento: </th><td><?php echo $this->aluno->getDataDesligamento(true); ?></td>
+            </tr>
+
+            <tr>
+                <th>Motivo do Desligamento: </th><td><?php echo $this->aluno->getMotivoDesligamento(); ?></td>
+            </tr>
+
+        <?php endif; ?>
+
+    </table>
+
+    <h2>Endereço</h2>
+
+    <table class="form-dados visualizacao" style="width: 60%;">
+        <tr>
+            <th style="width: 5%">Endereço: </th><td><?php echo $this->aluno->getCompleteEndereco() ?></td>
+            <th style="width: 10%">Bairro: </th><td><?php echo $this->aluno->getBairro() ?></td>
+        </tr>
+
+        <tr>
+            <th>CEP: </th><td><?php echo $this->aluno->getCep() ?></td>
+            <th>Cidade: </th><td><?php echo $this->aluno->getCidade() ?></td>
+            <th>Estado: </th><td><?php echo $this->aluno->getEstado() ?></td>
+        </tr>
+
+    </table>
+
+    <h2>Contato</h2>
+
+    <table class="form-dados visualizacao" style="width: 60%;">
+        <tr>
+            <th style="width: 10%">Email: </th><td><?php echo $this->aluno->getEmail() ?></td>
+        </tr>
+
+        <tr>
+            <th>Telefone 1: </th><td><?php echo $this->aluno->getTelefoneFixo() ?></td>
+            <th style="width: 10%">Telefone 2: </th><td><?php echo $this->aluno->getTelefoneCelular() ?></td>
+        </tr>
+
+    </table>
+
+    <?php
+    if ($this->aluno->hasTurmas() && !empty($this->calendarios)):
+        $array_turmas_periodo_atual = array();
+        $array_turmas_periodo_antigo = array();
+
+        foreach ($this->calendarios as $calendario) {
+            if ($calendario instanceof Application_Model_DatasAtividade) {
+                $aux = array();
+
+                foreach ($this->aluno->getCompleteTurmas() as $id_turma => $turma) {
+                    if ($calendario->getPeriodoCalendario()->getIdPeriodo() == $turma[Application_Model_Aluno::$index_turma]->getPeriodo()->getIdPeriodo())
+                        $aux[$id_turma] = $turma;
+                }
+
+                // separa as turmas de períodos anteriores das do período atual
+                if ($calendario->getPeriodoCalendario()->isPeriodoAtual()) {
+                    $array_turmas_periodo_atual['atual'] = $aux;
+                    $array_turmas_periodo_atual['periodo'] = $calendario->getPeriodoCalendario()->getIdPeriodo();
+                } else
+                    $array_turmas_periodo_antigo[$calendario->getPeriodoCalendario()->getIdPeriodo()] = $aux;
+            }
+        }
+        ?>
+
+        <h2>Turmas do Período Atual</h2>
+
+        <?php if (!empty($array_turmas_periodo_atual['atual'])): ?>
+            <table class="form_incrementa visualizacao" style="width: 80%;">
+                <tr>
+                    <th style="width: 8.3%">Turma</th>
+                    <th style="width: 8.3%">Condição de Matrícula</th>
+                    <th style="width: 8.3%">Situação</th>
+                    <th style="width: 8.3%">Recibo</th>
+                    <th style="width: 5%">Valor Pago</th>
+                    <th style="width: 27%">Notas</th>
+                    <th style="width: 16.6%">Frequência</th>
+                    <th style="width: 16.6%">Resultado Final</th>
+                </tr>
+
+                <?php
+                foreach ($array_turmas_periodo_atual['atual'] as $id_turma => $turma):
+                    $total_aulas = isset($this->total_lancamentos[$id_turma]) ? $this->total_lancamentos[$id_turma] : 0;
+                    ?>
+                    <tr>
+                        <td><?php echo $turma[Application_Model_Aluno::$index_turma]->toString() ?></td>
+                        <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getCondicaoMatriculaToString() ?></td>
+                        <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getSituacao() ?></td>
+                        <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getReciboToString() ?></td>
+                        <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getValorPagamento() ?></td>
+                        <td>
+                            <?php foreach ($turma[Application_Model_Aluno::$index_notas_turma] as $nota): ?>
+                                <?php if ($nota instanceof Application_Model_Nota): ?>
+                                    <?php echo $nota->toString() ?><br>
+                                <?php endif ?>
+                            <?php endforeach; ?>
+                            <?php echo $this->aluno->getNotaAcumulada($id_turma) ?>
+                        </td>
+
+                        <td><?php echo $this->aluno->getPorcentagemFaltas($turma[Application_Model_Aluno::$index_turma]->getIdTurma(), $total_aulas, true) ?></td>
+                        <td><?php echo $array_aprovacao[$turma[Application_Model_Aluno::$index_aprovacao_turma]] ?></td>
+                    </tr>
+                    <?php
+                endforeach;
+                ?>
+            </table>
+
+        <?php else: ?>
+            <p>O aluno não foi cadastrado em nenhuma turma do período atual, ou o período ainda não foi inicializado.</p>
+
+        <?php endif; ?>
+
+        <h2>Histórico</h2>
+
+        <?php foreach ($array_turmas_periodo_antigo as $id_periodo => $turmas_periodos): ?>
+            <p><b>Período: <?php echo $this->calendarios[$id_periodo]->getPeriodoCalendario()->getNomePeriodo() ?></b></p>
+
+            <?php if (!empty($turmas_periodos)): ?>
+                <table class="form_incrementa visualizacao" style="width: 80%;">
+                    <tr>
+                        <th style="width: 8.3%">Turma</th>
+                        <th style="width: 8.3%">Condição de Matrícula</th>
+                        <th style="width: 8.3%">Situação</th>
+                        <th style="width: 8.3%">Recibo</th>
+                        <th style="width: 5%">Valor Pago</th>
+                        <th style="width: 27%">Notas</th>
+                        <th style="width: 16.6%">Frequência</th>
+                        <th style="width: 16.6%">Resultado Final</th>
+                    </tr>
+                    <?php foreach ($turmas_periodos as $id_turma => $turma): ?>
+                        <?php $total_aulas = $this->calendarios[$id_periodo]->getQuantidadeAulas();
+                        ?>
+                        <tr>
+                            <td><?php echo $turma[Application_Model_Aluno::$index_turma]->toString() ?></td>
+                            <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getCondicaoMatriculaToString() ?></td>
+                            <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getSituacao() ?></td>
+                            <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getReciboToString() ?></td>
+                            <td><?php echo $turma[Application_Model_Aluno::$index_pagamento_turma]->getValorPagamento() ?></td>
+                            <td>
+                                <?php foreach ($turma[Application_Model_Aluno::$index_notas_turma] as $nota): ?>
+                                    <?php if ($nota instanceof Application_Model_Nota): ?>
+                                        <?php echo $nota->toString() ?><br>
+                                    <?php endif ?>
+                                <?php endforeach; ?>
+                                <?php echo $this->aluno->getNotaAcumulada($id_turma) ?>
+                            </td>
+                            <td><?php echo $this->aluno->getPorcentagemFaltas($turma[Application_Model_Aluno::$index_turma]->getIdTurma(), $total_aulas, true) ?></td>
+                            <td><?php echo $array_aprovacao[$turma[Application_Model_Aluno::$index_aprovacao_turma]] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php else:
+                ?>
+                <p>Nâo há nenhuma turma do aluno no período indicado.</p>
+            <?php
+            endif;
+        endforeach;
+    endif;
+    ?>
+
+    <table class="form-dados visualizacao" style="width: 60%;">
+        <tr>
+            <td><a href="<?php echo $this->url(array('controller' => 'aluno', 'action' => 'index'), null, true) ?>">Voltar</a></td>
+        </tr>           
+    </table>
+<?php else: ?>
+    <p>Aluno não encontrado.</p>
+
+<?php endif; ?>

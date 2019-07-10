@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<projectProfile type="default" version="1.12.3">
+  <projectDirectory>
+    <projectProfileFile filesystemName=".zfproject.xml"/>
+    <applicationDirectory classNamePrefix="Application_">
+      <configsDirectory>
+        <applicationConfigFile type="ini"/>
+      </configsDirectory>
+      <controllersDirectory>
+        <controllerFile controllerName="Index">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Aluno">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cadastrar"/>
+          <actionMethod actionName="alterar"/>
+          <actionMethod actionName="excluir"/>
+        </controllerFile>
+        <controllerFile controllerName="Curso">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cadastrar"/>
+          <actionMethod actionName="alterar"/>
+          <actionMethod actionName="excluir"/>
+        </controllerFile>
+        <controllerFile controllerName="Disciplina">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cadastrar"/>
+          <actionMethod actionName="alterar"/>
+          <actionMethod actionName="excluir"/>
+	  <actionMethod actionName="buscaDisciplinas"/>
+        </controllerFile>
+        <controllerFile controllerName="Turma">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cadastrar"/>
+          <actionMethod actionName="alterar"/>
+          <actionMethod actionName="excluir"/>
+        </controllerFile>
+        <controllerFile controllerName="Ajax">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cep"/>
+        </controllerFile>
+        <controllerFile controllerName="Login">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="admin"/>
+        </controllerFile>
+        <controllerFile controllerName="Voluntario">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="cadastrar"/>
+          <actionMethod actionName="alterar"/>
+          <actionMethod actionName="excluir"/>
+        </controllerFile>
+      </controllersDirectory>
+      <formsDirectory>
+        <formFile formName="FormAluno"/>
+        <formFile formName="FormConsultaAluno"/>
+        <formFile formName="FormCurso"/>
+        <formFile formName="FormDisciplina"/>
+        <formFile formName="FormConsultaDisciplina"/>
+        <formFile formName="FormConsultaCurso"/>
+        <formFile formName="FormTurma"/>
+        <formFile formName="FormConsultaTurma"/>
+        <formFile formName="FormVoluntario"/>
+        <formFile formName="FormConsultaVoluntario"/>
+        <formFile formName="FormLogin"/>
+      </formsDirectory>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
+      <modelsDirectory>
+        <modelFile modelName="Curso"/>
+        <modelFile modelName="Disciplina"/>
+        <modelFile modelName="Aluno"/>
+        <modelFile modelName="Turma"/>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Curso"/>
+          <dbTableFile dbTableName="Periodo"/>
+          <dbTableFile dbTableName="Disciplina"/>
+          <dbTableFile dbTableName="Aluno"/>
+          <dbTableFile dbTableName="Turma"/>
+          <dbTableFile dbTableName="Voluntario"/>
+          <dbTableFile dbTableName="Voluntario"/>
+        </dbTableDirectory>
+        <modelFile modelName="Voluntario"/>
+        <modelFile modelName="Periodo"/>
+      </modelsDirectory>
+      <modulesDirectory enabled="false"/>
+      <servicesDirectory enabled="false"/>
+      <viewsDirectory>
+        <viewScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Index">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Aluno">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Curso">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Disciplina">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Turma">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Aluno">
+            <viewScriptFile forActionName="cadastrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Ajax">
+            <viewScriptFile forActionName="cep"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Curso">
+            <viewScriptFile forActionName="cadastrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Disciplina">
+            <viewScriptFile forActionName="cadastrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Curso">
+            <viewScriptFile forActionName="alterar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Curso">
+            <viewScriptFile forActionName="excluir"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Disciplina">
+            <viewScriptFile forActionName="alterar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Disciplina">
+            <viewScriptFile forActionName="excluir"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Aluno">
+            <viewScriptFile forActionName="alterar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Aluno">
+            <viewScriptFile forActionName="excluir"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Turma">
+            <viewScriptFile forActionName="cadastrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Turma">
+            <viewScriptFile forActionName="alterar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Turma">
+            <viewScriptFile forActionName="excluir"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Login">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Voluntario">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Login">
+            <viewScriptFile forActionName="admin"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Voluntario">
+            <viewScriptFile forActionName="cadastrar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Voluntario">
+            <viewScriptFile forActionName="alterar"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Voluntario">
+            <viewScriptFile forActionName="excluir"/>
+          </viewControllerScriptsDirectory>
+	  <viewControllerScriptsDirectory forControllerName="Disciplina">
+            <viewScriptFile forActionName="buscaDisciplinas"/>
+          </viewControllerScriptsDirectory>
+        </viewScriptsDirectory>
+        <viewHelpersDirectory/>
+        <viewFiltersDirectory enabled="false"/>
+      </viewsDirectory>
+      <bootstrapFile filesystemName="Bootstrap.php"/>
+    </applicationDirectory>
+    <dataDirectory enabled="false">
+      <cacheDirectory enabled="false"/>
+      <searchIndexesDirectory enabled="false"/>
+      <localesDirectory enabled="false"/>
+      <logsDirectory enabled="false"/>
+      <sessionsDirectory enabled="false"/>
+      <uploadsDirectory enabled="false"/>
+    </dataDirectory>
+    <docsDirectory>
+      <file filesystemName="README.txt"/>
+    </docsDirectory>
+    <libraryDirectory>
+      <zfStandardLibraryDirectory enabled="false"/>
+    </libraryDirectory>
+    <publicDirectory>
+      <publicStylesheetsDirectory enabled="false"/>
+      <publicScriptsDirectory enabled="false"/>
+      <publicImagesDirectory enabled="false"/>
+      <publicIndexFile filesystemName="index.php"/>
+      <htaccessFile filesystemName=".htaccess"/>
+    </publicDirectory>
+    <projectProvidersDirectory enabled="false"/>
+    <temporaryDirectory enabled="false"/>
+    <testsDirectory>
+      <testPHPUnitConfigFile filesystemName="phpunit.xml"/>
+      <testPHPUnitBootstrapFile filesystemName="bootstrap.php"/>
+      <testApplicationDirectory>
+        <testApplicationControllerDirectory>
+          <testApplicationControllerFile forControllerName="Index"/>
+        </testApplicationControllerDirectory>
+      </testApplicationDirectory>
+      <testLibraryDirectory/>
+    </testsDirectory>
+  </projectDirectory>
+</projectProfile>

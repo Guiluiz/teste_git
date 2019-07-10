@@ -1,0 +1,44 @@
+<?= $this->form ?>
+
+<?php
+if (!empty($this->turmas)) {
+    echo $this->table($this->turmas, 4, null, $this->liberacao); // constrói a tabela das turmas do aluno
+    // constrói a tabela dos pagamentos da turma do aluno
+    if (!empty($this->pagamentos))
+        echo $this->table($this->pagamentos, 6, null, array('alimentos' => $this->alimentos, 'condicao' => $this->condicoes_pagamentos_turmas, 'tipo_isencao_pendencia' => $this->tipo_isencao_pendencia_turmas, 'recibos_turmas' => $this->recibos_turmas, 'situacao_turmas' => $this->situacao_turmas), $this->turmas);
+
+    // constrói a tabela com os alimentos referentes ao pagamentos das turmas
+    if (!empty($this->alimentos))
+        echo $this->table($this->alimentos, 5, null, $this->todos_alimentos, $this->turmas);
+}
+?>
+
+<script type="text/javascript" src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/cidades-estados-js/cidades-estados-1.2-utf8.js"></script>
+<script src="<?php echo $this->baseUrl() . '/js/ui.datepicker-pt-BR.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/jquery.maskedinput.min.js' ?>"></script>
+
+<script src="<?php echo $this->baseUrl() . '/js/date-pt-BR.js' ?>"></script>
+
+<script src="<?php echo $this->baseUrl() . '/js/jquery.validate.min.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/form.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/functions.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/controle_alunos.js' ?>"></script>
+
+<script>
+    $(function() {
+        form.iniForm('<?= $this->url(array('controller' => 'ajax', 'action' => 'cep'), null, true) ?>');
+
+        controle_aluno.ini(
+                '<?php echo $this->url(array('controller' => 'aluno', 'action' => 'verifica-aluno'), null, true); ?>',
+                '<?php echo $this->baseUrl() . "/imagens/calendar.png" ?>',
+                '<?php echo $this->url(array('controller' => 'alimento', 'action' => 'buscar-alimentos'), null, true); ?>',
+                '<?php echo $this->url(array('controller' => 'disciplina', 'action' => 'buscar-disciplinas'), null, true); ?>',
+                '<?php echo $this->url(array('controller' => 'turma', 'action' => 'buscar-turmas'), null, true); ?>',
+                '<?php echo $this->url(array('controller' => 'turma', 'action' => 'buscar-quantidade-turma'), null, true); ?>',
+                '<?php echo $this->url(array('controller' => 'turma', 'action' => 'verificar-liberacao-turma'), null, true); ?>',
+                1,
+                '<?php echo $this->data(3) ?>',
+                '<?php echo $this->data(4) ?>'
+                );
+    });
+</script>

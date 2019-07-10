@@ -1,0 +1,42 @@
+<?php if (empty($this->inativo)): ?>
+    <div class="container-aviso aviso-periodo"><div class="ui-widget">
+            <div style="padding: 0 .7em; width:90%; margin: 0 auto; margin-bottom: 2em" class="ui-state-error ui-corner-all">
+                <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
+                    <b>Atenção!</b> Caso uma data seja retirada, as frequências e notas lançadas nessa data também serão excluídas.
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->form ?>
+
+    <div id='container-datas'>
+        <?php foreach ($this->datas as $data): ?>
+            <div class="data-selecionada" valor="<?php echo $data ?>"><?php echo $data ?> <span title="Clique para remover essa data" class="remove">X</span></div>
+        <?php endforeach; ?>
+    </div>
+
+    <script src="<?php echo $this->baseUrl() . '/js/date-pt-BR.js' ?>"></script>
+    <script src="<?php echo $this->baseUrl() . '/js/ui.datepicker-pt-BR.js' ?>"></script>
+    <script src="<?php echo $this->baseUrl() . '/js/functions.js' ?>"></script>
+    <script src="<?php echo $this->baseUrl() . '/js/controle_calendario_academico.js' ?>"></script>
+
+    <script>
+        $(function() {
+            controle_calendario.ini(
+                    '<?= $this->baseUrl() . "/imagens/calendar.png" ?>',
+                    '<?php echo $this->data(0) ?>',
+                    '<?php echo $this->data(1) ?>'
+            );
+        });
+    </script>
+
+<?php else: ?>
+    <div class="container-aviso aviso-periodo"><div class="ui-widget">
+            <div style="padding: 0 .7em; width:90%; margin: 0 auto; margin-bottom: 2em" class="ui-state-error ui-corner-all">
+                <p><span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-alert"></span>
+                    É necessário escolher o período de funcionamento antes de escolher as datas de atividades
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>

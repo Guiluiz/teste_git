@@ -1,0 +1,22 @@
+<?php echo $this->form?>
+
+<div id="container-porcentagem">
+    <span style="display:none;">Por favor, aguarde alguns instantes. Seu relatório está sendo gerado.<br><br><br></span>
+    <div id="porcentagem"></div>
+</div>
+
+<!--<script src="<?php echo $this->baseUrl() . '/js/porcentagem.js'; ?>" ></script>-->
+<script src="<?php echo $this->baseUrl() . '/js/jquery.validate.min.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/form.js' ?>"></script>
+
+<script src="<?php echo $this->baseUrl() . '/js/functions.js' ?>"></script>
+<script src="<?php echo $this->baseUrl() . '/js/controle_relatorios.js' ?>"></script>
+
+<script>
+    $(function() {
+        controle_relatorios.ini(
+                '<?= $this->url(array('controller' => 'ajax', 'action' => 'ajax-relatorio')); ?>',
+                '<?= $this->url(array('controller' => 'turma', 'action' => 'buscar-turmas')); ?>'
+                );
+    });
+</script>

@@ -1,0 +1,43 @@
+<h2>Consultar Curso</h2>
+
+<div id="link-cadastrar">
+    <a href = "<?php echo $this->url(array('controller' => 'curso', 'action' => 'cadastrar'), null, true) ?>">Cadastrar Novo Curso</a>     
+</div>
+
+<?= $this->form ?>
+
+<?php if ($this->resultado_busca instanceof Zend_Paginator) : ?>
+    <?php if (count($this->resultado_busca) > 0) : ?>
+        <div id='resultado-busca'>
+            <h3>Resultados da Busca</h3>
+            <span>Foram encontrados (<?= $this->resultado_busca->getTotalItemCount() ?>) registros</span>
+            <table>
+                <tr>
+                    <th>Nome do Curso</th>
+                    <th colspan="2">Opções</th>
+                </tr>
+
+                <?php foreach ($this->resultado_busca as $curso) : ?>
+                    <tr>
+                        <td><?= $curso->getNomeCurso() ?></td>
+                        <?php if ($curso->getStatus() == Application_Model_Curso::status_ativo): ?>
+                            <td><a href='<?= $this->url(array('controller' => 'curso', 'action' => 'alterar', 'curso' => $curso->getIdCurso(true)), null, true) ?>'>Alterar</a></td>                     
+                            <td><a href='<?= $this->url(array('controller' => 'curso', 'action' => 'cancelar', 'curso' => $curso->getIdCurso(true)), null, true) ?>'>Cancelar</a></td>                     
+                            <!--<td><a href='<?= $this->url(array('controller' => 'curso', 'action' => 'excluir', 'curso' => $curso->getIdcurso(true)), null, true) ?>'>Excluir</a></td>-->
+
+                        <?php else: ?>
+                            <td colspan="2"><a href='<?= $this->url(array('controller' => 'curso', 'action' => 'ativar', 'curso' => $curso->getIdCurso(true)), null, true) ?>'>Ativar</a></td>
+
+                        <?php endif ?>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+
+        <?php echo $this->paginationControl($this->resultado_busca, 'Sliding', 'Decorators/pagination.phtml'); ?>
+
+    <?php else : ?>
+        <script>exibeMensagem('Nenhum curso foi encontrado.', 'Busca de Cursos');</script>
+
+    <?php endif; ?>
+<?php endif; ?>
